@@ -54,17 +54,17 @@ output:A1 size is : 32
 ````
 type A1 struct {
 //    字段名  类型  所占字节（对齐系数） 起始偏移量     当前大小
-	    a  bool   // 1                0            1=1
-//padding      -         3                -            1+3=4
-	    b  int32  // 4              4*1=4          1+3+4=8
-	    c  byte   // 1             1*0+8=8         1+3+4+1=9
-//padding      -         7                -            1+3+4+1+7=16
-	    d  int64  // 8             8*2=16          1+3+4+1+7+8=24
-	    e  int8   // 1             1*0+24=24       1+3+4+1+7+8+1=25
-//padding      -         7                -            1+3+4+1+7+8+1+7=32
+	 a  bool   // 1                0            1=1
+//padding   -         3                -            1+3=4
+	 b  int32  // 4              4*1=4          1+3+4=8
+	 c  byte   // 1             1*0+8=8         1+3+4+1=9
+//padding   -         7                -            1+3+4+1+7=16
+	 d  int64  // 8             8*2=16          1+3+4+1+7+8=24
+	 e  int8   // 1             1*0+24=24       1+3+4+1+7+8+1=25
+//padding   -         7                -            1+3+4+1+7+8+1+7=32
 }
 ````
-SizeOf(A1) = 8 * 4 = 32 ,32 > 25
+SizeOf(A1) = 8 * 4 = 32 ,32 > 25；
 
 go的unsafe包也提供了Alignof(x ArbitraryType)来获取字段或结构体的对齐值，Offsetof(x ArbitraryType)来获取字段的偏移量，我们也可以用这两个方法验证我们的想法。
 
@@ -89,15 +89,15 @@ type A1 struct {
 ````
 type A1Rearrange struct {
 //    字段名  类型  所占字节（对齐系数） 起始偏移量     当前大小
-	    d  int64  // 8                 0            8
-	    b  int32  // 4              4*0+8=8       8+4=12
-	    a  bool   // 1              1*0+12=12     8+4+1=13
-	    c  byte   // 1              1*0+13=13     8+4+1+1=14
-	    e  int8   // 1              1*0+13=14     8+4+1+1+1=15
-//padding  -         1                -          8+4+1+1+1+1=16
+	 d  int64  // 8                 0            8
+	 b  int32  // 4              4*0+8=8       8+4=12
+	 a  bool   // 1              1*0+12=12     8+4+1=13
+	 c  byte   // 1              1*0+13=13     8+4+1+1=14
+	 e  int8   // 1              1*0+13=14     8+4+1+1+1=15
+//padding   -         1                -           8+4+1+1+1+1=16
 }
 ````
-SizeOf(A1Rearrange) = 8 * 2 = 16 ,16 > 15
+SizeOf(A1Rearrange) = 8 * 2 = 16 ,16 > 15；
 
 只是简单调换了一下字段顺序，对结构体A来说，就可以减少一半的大小。
 
@@ -110,7 +110,7 @@ SizeOf(A1Rearrange) = 8 * 2 = 16 ,16 > 15
 
 2、性能原因：数据结构(尤其是栈)应该尽可能地在自然边界上对齐。原因在于，为了访问未对齐的内存，处理器需要作两次内存访问；而对齐的内存访问仅需要一次访问。
 
-![twice_read](https://github.com/codelee1/uploads/tree/master/memory_alignment/twice_read.jpg "twice_read")
+![image](https://github.com/codelee1/uploads/tree/master/memory_alignment/twice_read.jpg "twice_read")
 
 在上图中，假设从 index = 1 开始读取，将会出现很崩溃的问题。因为它的内存访问边界是不对齐的。因此 CPU 会做一些额外的处理工作。如下：
 
