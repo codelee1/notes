@@ -110,7 +110,7 @@ SizeOf(A1Rearrange) = 8 * 2 = 16 ,16 > 15；
 
 2、性能原因：数据结构(尤其是栈)应该尽可能地在自然边界上对齐。原因在于，为了访问未对齐的内存，处理器需要作两次内存访问；而对齐的内存访问仅需要一次访问。
 
-![image](https://github.com/codelee1/uploads/tree/master/memory_alignment/twice_read.jpg "twice_read")
+![twice_read](https://raw.githubusercontent.com/codelee1/uploads/master/memory_alignment/twice_read.jpg "twice_read")
 
 在上图中，假设从 index = 1 开始读取，将会出现很崩溃的问题。因为它的内存访问边界是不对齐的。因此 CPU 会做一些额外的处理工作。如下：
 
@@ -254,8 +254,8 @@ structlayout -json teststh A1|structlayout-svg -t "a1-padding" >a1.svg
 ````
 命令会在当前文件夹下生成A2结构体的svg内存分析图:
 
-![a1.avg](https://github.com/codelee1/uploads/tree/master/memory_alignment/a1.svg "a1.avg")
-
+![a1.avg](https://raw.githubusercontent.com/codelee1/uploads/master/memory_alignment/a1.svg "a1.avg")
+![a1.avg](https://raw.githubusercontent.com/codelee1/uploads/master/memory_alignment/a1Rearrange.svg "a1.avg")
 
 排版建议(粗暴方式，按照对齐系数的递减来重排字段)：
 ````
