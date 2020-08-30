@@ -22,7 +22,7 @@ Services：服务层，即实现业务的地方。
 从架构图来看，简单明了。需要注意的是除了上述的主要三层结构外，还加入了不同的中间件，主要在Endpoints和Service中实现。大多中间件其实是业务无关的，
 比如记录日志、访问限制频率、负载均衡分布式追踪等。
 
-图片：https://gokit.io/faq/onion.png
+![images](https://gokit.io/faq/onion.png "onion")
 
 ### 模块组件间的关系-依赖注入
 
