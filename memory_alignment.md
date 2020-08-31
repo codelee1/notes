@@ -172,7 +172,7 @@ type A2 struct {
 		str string // string类型字段为：uintptr的Data，int类型的Len，所占字节为16
 	}
 	m map[string]int32 // 8 map结构有很多字段的，但是只使用map的的指针值，所以只占8字节
-	i interface{}      //16 interface结构一个为iface的结构体，有一个tap指针和data指针；一个为eface结构体，有一个_type指针和一个data指针，所以大小为18
+	i interface{}      //16 interface结构一个为iface的结构体，有一个tap指针和data指针；一个为eface结构体，有一个_type指针和一个data指针，所以大小为16
 }
 
 ````
