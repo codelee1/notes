@@ -251,6 +251,8 @@ go install honnef.co/go/tools/cmd/structlayout-optimize
 分析：
 ````
 structlayout -json teststh A1|structlayout-svg -t "a1-padding" >a1.svg
+
+注释：structlayout -json "包名" "结构体名称"|structlayout-svg -t "svg标题" > 文件名.svg
 ````
 命令会在当前文件夹下生成A2结构体的svg内存分析图:
 
@@ -260,6 +262,9 @@ structlayout -json teststh A1|structlayout-svg -t "a1-padding" >a1.svg
 排版建议(粗暴方式，按照对齐系数的递减来重排字段)：
 ````
 structlayout -json teststh A1|structlayout-optimize -r
+
+注释：structlayout -json "包名" "结构体名称"|structlayout-optimize -r
+
 
 output:
 A1.d int64: 0-8 (size 8, align 8)
