@@ -172,7 +172,7 @@ type A2 struct {
 		str string // string类型字段为：uintptr的Data，int类型的Len，所占字节为16
 	}
 	m map[string]int32 // 8 map结构有很多字段的，但是只使用map的的指针值，所以只占8字节
-	i interface{}      //16 interface结构一个为iface的结构体，有一个tap指针和data指针；一个为eface结构体，有一个_type指针和一个data指针，所以大小为18
+	i interface{}      //16 interface结构一个为iface的结构体，有一个tap指针和data指针；一个为eface结构体，有一个_type指针和一个data指针，所以大小为16
 }
 
 ````
@@ -251,6 +251,8 @@ go install honnef.co/go/tools/cmd/structlayout-optimize
 分析：
 ````
 structlayout -json teststh A1|structlayout-svg -t "a1-padding" >a1.svg
+
+注释：structlayout -json "包名" "结构体名称"|structlayout-svg -t "svg标题" > 文件名.svg
 ````
 命令会在当前文件夹下生成A2结构体的svg内存分析图:
 
@@ -260,6 +262,9 @@ structlayout -json teststh A1|structlayout-svg -t "a1-padding" >a1.svg
 排版建议(粗暴方式，按照对齐系数的递减来重排字段)：
 ````
 structlayout -json teststh A1|structlayout-optimize -r
+
+注释：structlayout -json "包名" "结构体名称"|structlayout-optimize -r
+
 
 output:
 A1.d int64: 0-8 (size 8, align 8)
