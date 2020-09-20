@@ -85,7 +85,9 @@ SetBurst(int) 修改桶大小
 源码参考思想为维基百科：https://en.wikipedia.org/wiki/Token_bucket
 
 原理图为: 
+
 ![token-bucket](https://raw.githubusercontent.com/codelee1/uploads/master/limiter/token-bucket.jpg "token-bucket")
+
 
 简单的原理为：令牌桶就是想象有一个固定大小的桶，系统会以恒定速率向桶中放 Token，桶满则暂时不放。
 
